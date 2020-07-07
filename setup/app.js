@@ -49,15 +49,43 @@ const nextBtn = document.querySelector(".next-btn");
 const randomBtn = document.querySelector(".random-btn");
 
 //set starting item
-let currentItem = 1;
+let currentItem = 3;
 
 //load intial item
 
 window.addEventListener("DOMContentLoaded", function () {
-  const item = reviews[currentItem];
+  showPerson(currentItem);
+});
+function showPerson(person) {
+  const item = reviews[person];
+  // img.src = item.img;
 
-  // img.scr = item.img;
   author.textContent = item.name;
   job.textContent = item.job;
   info.textContent = item.text;
+}
+
+//show net person
+nextBtn.addEventListener("click", function () {
+  currentItem++;
+  if (currentItem > reviews.length - 1) {
+    currentItem = 0;
+  }
+  showPerson(currentItem);
+});
+prevBtn.addEventListener("click", function () {
+  currentItem--;
+  if (currentItem < 0) {
+    currentItem = reviews.length - 1;
+  }
+  showPerson(currentItem);
+});
+
+randomBtn.addEventListener("click", function () {
+  console.log("random");
+  const randomNumber = getRandomNo();
+  showPerson(randomNumber);
+  function getRandomNo() {
+    return Math.floor(Math.random() * reviews.length);
+  }
 });
